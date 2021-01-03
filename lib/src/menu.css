@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #F0F0F0;
+}
+
+#menu {
+  display: none;
+  position: absolute;
+  width: 130px;
+  background-color: dimgrey;
+  box-shadow: 0 0 5px black;
+  border-radius: 3px;
+}
+
+#menu button {
+  width: 100%;
+  background-color: dimgrey;
+  border: none;
+  margin: 0;
+  padding: 10px;
+}
+
+#menu button:hover {
+  background-color: lightgray;
+}

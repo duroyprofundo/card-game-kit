@@ -1,0 +1,174 @@
+{
+    "name": "Passage Through Mirkwood",
+    "version": "1.0",
+    "backFilename": "https://localhost/cardback.jpg",
+    "quests": {
+        "cards": [
+            {
+                "name": "Flies and Spiders",
+                "filename": "https://localhost/core119a.jpg",
+                "backFilename": "https://localhost/core119b.jpg",
+                "copies": 1,
+                "type": "Quest"
+            },
+            {
+                "name": "A Fork in the Road",
+                "filename": "https://localhost/core120a.jpg",
+                "backFilename": "https://localhost/core120b.jpg",
+                "copies": 1,
+                "type": "Quest"
+            },
+            {
+                "name": "Don't Leave the Path!",
+                "filename": "https://localhost/core121a.jpg",
+                "backFilename": "https://localhost/core121b.jpg",
+                "copies": 1,
+                "type": "Quest"
+            },
+            {
+                "name": "Beorn's Path",
+                "filename": "https://localhost/core122a.jpg",
+                "backFilename": "https://localhost/core122b.jpg",
+                "copies": 1,
+                "type": "Quest"
+            }
+        ]
+    },
+    "encounterSets": [
+        {
+            "set": "Dol Guldur Orcs",
+            "cards": [
+                {
+                    "name": "Dol Guldur Orcs",
+                    "filename": "https://localhost/core089.jpg",
+                    "copies": 3,
+                    "type": "Enemy"
+                },
+                {
+                    "name": "Chieftan Ufthak",
+                    "filename": "https://localhost/core090.jpg",
+                    "copies": 1,
+                    "type": "Enemy"
+                },
+                {
+                    "name": "Dol Guldur Beastmaster",
+                    "filename": "https://localhost/core091.jpg",
+                    "copies": 2,
+                    "type": "Enemy"
+                },
+                {
+                    "name": "Driven by Shadow",
+                    "filename": "https://localhost/core092.jpg",
+                    "copies": 1,
+                    "type": "Treachery"
+                },
+                {
+                    "name": "The Necromancer's Reach",
+                    "filename": "https://localhost/core093.jpg",
+                    "copies": 3,
+                    "type": "Treachery"
+                },
+                {
+                    "name": "Necromancer's Pass",
+                    "filename": "https://localhost/core094.jpg",
+                    "copies": 2,
+                    "type": "Location"
+                },
+                {
+                    "name": "Enchanted Stream",
+                    "filename": "https://localhost/core095.jpg",
+                    "copies": 2,
+                    "type": "Location"
+                }
+            ]
+        },
+        {
+            "set": "Spiders of Mirkwood",
+            "cards": [
+                {
+                    "name": "King Spider",
+                    "filename": "https://localhost/core074.jpg",
+                    "copies": 2,
+                    "type": "Enemy"
+                },
+                {
+                    "name": "Hummerhorns",
+                    "filename": "https://localhost/core075.jpg",
+                    "copies": 1,
+                    "type": "Enemy"
+                },
+                {
+                    "name": "Ungoliant's Spawn",
+                    "filename": "https://localhost/core076.jpg",
+                    "copies": 1,
+                    "type": "Enemy"
+                },
+                {
+                    "name": "Great Forest Web",
+                    "filename": "https://localhost/core077.jpg",
+                    "copies": 2,
+                    "type": "Location"
+                },
+                {
+                    "name": "Mountains of Mirkwood",
+                    "filename": "https://localhost/core078.jpg",
+                    "copies": 3,
+                    "type": "Location"
+                },
+                {
+                    "name": "Eyes of the Forest",
+                    "filename": "https://localhost/core079.jpg",
+                    "copies": 1,
+                    "type": "Treachery"
+                },
+                {
+                    "name": "Caught in a Web",
+                    "filename": "https://localhost/core080.jpg",
+                    "copies": 2,
+                    "type": "Treachery"
+                }
+            ]
+        },
+        {
+            "set": "Passage Through Mirkwood",
+            "cards": [
+                {
+                    "name": "Forest Spider",
+                    "filename": "https://localhost/core096.jpg",
+                    "copies": 4,
+                    "type": "Enemy"
+                },
+                {
+                    "name": "East Bight Patrol",
+                    "filename": "https://localhost/core097.jpg",
+                    "copies": 1,
+                    "type": "Enemy"
+                },
+                {
+                    "name": "Black Forest Bats",
+                    "filename": "https://localhost/core098.jpg",
+                    "copies": 1,
+                    "type": "Enemy"
+                },
+                {
+                    "name": "Old Forest Road",
+                    "filename": "https://localhost/core099.jpg",
+                    "copies": 2,
+                    "type": "Location"
+                },
+                {
+                    "name": "Forest Gate",
+                    "filename": "https://localhost/core100.jpg",
+                    "copies": 2,
+                    "type": "Location"
+                }
+            ]
+        }
+    ],
+    "setup": {
+        "cards": [
+            "Old Forest Road",
+            "Forest Spider"
+        ]
+    }
+}

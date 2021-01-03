@@ -1,0 +1,18 @@
+TODO
+- public/private variables and methods and add setters/getters for all variables (no more direct access)
+- Add randomizer to offboard area
+- add context menu for cards (e.g. move to back)
+- Remove hard coded sizes -- everything should be based on window width/height
+- Test mobile
+- Undo / Redo
+- Clean up all the code a lot!!!
+    - constructor arguments
+    - grouping of functions
+    - code re-use
+    - performance optimizations
+    - error handling
+- Create Free Cell Example
+- Create another Open Source Card Game Example
+- Add Arkham Horror: LCG
+- Add Marvel Champions LCG
+- Separate card-game-kit from games

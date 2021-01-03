@@ -1,0 +1,194 @@
+{
+    "name" : "Seastan's Single Core Set Solo",
+    "version" : "2.0",
+    "url" : "https://ringsdb.com/decklist/view/961/seastan-s-single-core-set-solo-2.0",
+    "backFilename": "https://localhost/cardback.jpg",
+    "crossOrigin": true,
+    "heroes": {
+        "startingThreat": 27,
+        "cards": [
+            {
+                "name": "Theodred",
+                "filename": "https://localhost/core002.jpg",
+                "copies": 1,
+                "type": "Hero"
+            },
+            {
+                "name": "Éowyn",
+                "filename": "https://localhost/core007.jpg",
+                "copies": 1,
+                "type": "Hero"
+            },
+            {
+                "name": "Beravor",
+                "filename": "https://localhost/core012.jpg",
+                "copies": 1,
+                "type": "Hero"
+            }
+        ]
+    },
+    "cards" : [
+        {
+            "name" : "Guard of the Citadel",
+            "filename": "https://localhost/core013.jpg",
+            "copies": 3,
+            "type": "Ally"
+        },
+        {
+            "name" : "Faramir",
+            "filename": "https://localhost/core014.jpg",
+            "copies": 2,
+            "type": "Ally"
+        },
+        {
+            "name" : "Son of Arnor",
+            "filename": "https://localhost/core015.jpg",
+            "copies": 2,
+            "type": "Ally"
+        },
+        {
+            "name" : "Snowbourn Scout",
+            "filename": "https://localhost/core016.jpg",
+            "copies": 3,
+            "type": "Ally"
+        },
+        {
+            "name" : "Silverlode Archer",
+            "filename": "https://localhost/core017.jpg",
+            "copies": 2,
+            "type": "Ally"
+        },
+        {
+            "name" : "Beorn",
+            "filename": "https://localhost/core031.jpg",
+            "copies": 1,
+            "type": "Ally"
+        },
+        {
+            "name" : "Northern Tracker",
+            "filename": "https://localhost/core045.jpg",
+            "copies": 2,
+            "type": "Ally"
+        },
+        {
+            "name" : "Erebor Hammersmith",
+            "filename": "https://localhost/core059.jpg",
+            "copies": 2,
+            "type": "Ally"
+        },
+        {
+            "name" : "Henamarth Riversong",
+            "filename": "https://localhost/core060.jpg",
+            "copies": 1,
+            "type": "Ally"
+        },
+        {
+            "name" : "Miner of the Iron Hills",
+            "filename": "https://localhost/core061.jpg",
+            "copies": 2,
+            "type": "Ally"
+        },
+        {
+            "name" : "Gléowine",
+            "filename": "https://localhost/core062.jpg",
+            "copies": 2,
+            "type": "Ally"
+        },
+        {
+            "name" : "Gandalf",
+            "filename": "https://localhost/core073.jpg",
+            "copies": 3,
+            "type": "Ally"
+        },
+        {
+            "name" : "Steward of Gondor",
+            "filename": "https://localhost/core026.jpg",
+            "copies": 2,
+            "type": "Attachment"
+        },
+        {
+            "name" : "Celebrian's Stone",
+            "filename": "https://localhost/core027.jpg",
+            "copies": 1,
+            "type": "Attachment"
+        },
+        {
+            "name" : "Unexpected Courage",
+            "filename": "https://localhost/core057.jpg",
+            "copies": 1,
+            "type": "Attachment"
+        },
+        {
+            "name" : "Forest Snare",
+            "filename": "https://localhost/core069.jpg",
+            "copies": 2,
+            "type": "Attachment"
+        },
+        {
+            "name" : "Protector of Lórien",
+            "filename": "https://localhost/core070.jpg",
+            "copies": 2,
+            "type": "Attachment"
+        },
+        {
+            "name" : "Self Preservation",
+            "filename": "https://localhost/core072.jpg",
+            "copies": 2,
+            "type": "Attachment"
+        },
+        {
+            "name" : "Ever Vigilant",
+            "filename": "https://localhost/core020.jpg",
+            "copies": 2,
+            "type": "Event"
+        },
+        {
+            "name" : "Sneak Attack",
+            "filename": "https://localhost/core023.jpg",
+            "copies": 2,
+            "type": "Event"
+        },
+        {
+            "name" : "Grim Resolve",
+            "filename": "https://localhost/core025.jpg",
+            "copies": 1,
+            "type": "Event"
+        },
+        {
+            "name" : "The Galadhrim's Greeting",
+            "filename": "https://localhost/core046.jpg",
+            "copies": 2,
+            "type": "Event"
+        },
+        {
+            "name" : "Hasty Stroke",
+            "filename": "https://localhost/core048.jpg",
+            "copies": 2,
+            "type": "Event"
+        },
+        {
+            "name" : "A Test of Will",
+            "filename": "https://localhost/core050.jpg",
+            "copies": 2,
+            "type": "Event"
+        },
+        {
+            "name" : "Stand and Fight",
+            "filename": "https://localhost/core051.jpg",
+            "copies": 2,
+            "type": "Event"
+        },
+        {
+            "name" : "Dwarven Tomb",
+            "filename": "https://localhost/core053.jpg",
+            "copies": 1,
+            "type": "Event"
+        },
+        {
+            "name" : "Lórien's Wealth",
+            "filename": "https://localhost/core064.jpg",
+            "copies": 1,
+            "type": "Event"
+        }
+    ]
+}
