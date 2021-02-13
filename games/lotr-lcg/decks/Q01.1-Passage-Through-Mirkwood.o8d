@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<deck game="a21af4e8-be4b-4cda-a6b6-534f9717391f">
+  <section name="Quest" shared="True">
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9119">Flies and Spiders</card>
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9121">A Fork in the Road</card>
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9123">A Chosen Path</card>
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9125">A Chosen Path</card>
+  </section>
+  <section name="Encounter" shared="True">
+    <card qty="2" id="51223bd0-ffd1-11df-a976-0801200c9074">King Spider</card>
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9075">Hummerhorns</card>
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9076">Ungoliant's Spawn</card>
+    <card qty="3" id="51223bd0-ffd1-11df-a976-0801200c9089">Dol Guldur Orcs</card>
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9090">Chieftan Ufthak</card>
+    <card qty="2" id="51223bd0-ffd1-11df-a976-0801200c9091">Dol Guldur Beastmaster</card>
+    <card qty="3" id="51223bd0-ffd1-11df-a976-0801200c9096">Forest Spider</card>
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9097">East Bight Patrol</card>
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9098">Black Forest Bats</card>
+    <card qty="2" id="51223bd0-ffd1-11df-a976-0801200c9077">Great Forest Web</card>
+    <card qty="3" id="51223bd0-ffd1-11df-a976-0801200c9078">Mountains of Mirkwood</card>
+    <card qty="2" id="51223bd0-ffd1-11df-a976-0801200c9094">Necromancer's Pass</card>
+    <card qty="2" id="51223bd0-ffd1-11df-a976-0801200c9095">Enchanted Stream</card>
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9099">Old Forest Road</card>
+    <card qty="2" id="51223bd0-ffd1-11df-a976-0801200c9100">Forest Gate</card>
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9079">Eyes of the Forest</card>
+    <card qty="2" id="51223bd0-ffd1-11df-a976-0801200c9080">Caught in a Web</card>
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9092">Driven by Shadow</card>
+    <card qty="3" id="51223bd0-ffd1-11df-a976-0801200c9093">The Necromancer's Reach</card>
+  </section>
+  <section name="Setup" shared="True" />
+  <section name="Hero" shared="False" />
+  <section name="Ally" shared="False" />
+  <section name="Attachment" shared="False" />
+  <section name="Event" shared="False" />
+  <section name="Side Quest" shared="False" />
+  <section name="Sideboard" shared="False" />
+  <section name="Second Quest Deck" shared="True" />
+  <section name="Special" shared="True" />
+  <section name="Second Special" shared="True" />
+  <section name="Staging Setup" shared="True">
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9099">Old Forest Road</card>
+    <card qty="1" id="51223bd0-ffd1-11df-a976-0801200c9096">Forest Spider</card>
+  </section>
+  <section name="Active Setup" shared="True" />
+  <notes><![CDATA[]]></notes>
+</deck>

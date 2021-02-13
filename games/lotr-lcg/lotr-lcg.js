@@ -297,13 +297,13 @@ class LotrLcg {
         const encounterLoadButton = this.addLoadButton(layer,
             this.cardWidth + 60, 10, this.cardWidth - 10, this.cardHeight - 10, 'Load',
             () => {
-                this.loadEncounterDeck(encounterLoadButton);
+                this.loadDeckFromFile(encounterLoadButton, true);
             });
 
         const playerLoadButton = this.addLoadButton(layer,
             this.cardWidth + 60, this.height-this.cardHeight, this.cardWidth-10, this.cardHeight-10, 'Load',
             () => {
-                this.loadPlayerDeck(playerLoadButton);
+                this.loadDeckFromFile(playerLoadButton, false);
             });
     }
 
@@ -470,192 +470,152 @@ class LotrLcg {
         input.click();
     }
 
-    loadEncounterDeck(button) {
-        this.fileLoad((content, _, extension) => {
+    loadDeckFromFile(button, isEncounter) {
+        this.fileLoad((content, name, extension) => {
             try {
-                if (extension != 'json') {
-                    throw new Error('Invalid file type');
+                if (extension == 'o8d') {
+                    if (isEncounter) {
+                        this.encounterXml = content;
+                        this.encounterName = name;
+                    } else {
+                        this.playerXml = content;
+                        this.playerName = name;
+                    }
+                } else {
+                    // Assume all other files are an index
+                    this.loadCardIndex(content);
                 }
 
-                const json = JSON.parse(content);
-                const encounterJson = {};
-                encounterJson.name = json.name;
-                encounterJson.backFilename = json.backFilename;
-                encounterJson.cards = [];
-                encounterJson.crossOrigin = json.crossOrigin;
+                var xmlData = isEncounter ? this.encounterXml : this.playerXml;
+                var xmlName = isEncounter ? this.encounterName : this.playerName;
 
-                json.encounterSets.forEach((set) => {
-                    Array.prototype.push.apply(encounterJson.cards, set.cards);
-                });
+                if (xmlData && this.cardIndex) {
+                    const data = {};
 
-                if (json.setup && json.setup.cards) {
-                    const setupCards = [];
+                    data.json = {};
+                    data.json.backFilename = isEncounter ? this.cardIndex.encounterBack : this.cardIndex.playerBack;
+                    data.json.crossOrigin = this.cardIndex.crossOrigin;
+                    data.json.cards = [];
 
-                    encounterJson.cards.forEach((card) => {
-                        for (let i = 0; i < json.setup.cards.length; i++) {
-                            const name = json.setup.cards[i];
-                            if (card.name == name) {
-                                card.copies = card.copies - 1;
-                                const cardCopy = JSON.parse(JSON.stringify(card));
-                                cardCopy.copies = 1;
-                                setupCards.push(cardCopy);
+                    if (isEncounter) {
+                        data.questJson = {};
+                        data.questJson.name = xmlName;
+                        data.questJson.crossOrigin = this.cardIndex.crossOrigin;
+                        data.questJson.cards = [];
+
+                        data.setup = [];
+                    } else {
+                        data.heroes = [];
+                        data.startingThreat = 0;
+                    }
+
+                    const xml = new window.DOMParser().parseFromString(xmlData, "text/xml");
+                    const sections = xml.getElementsByTagName("section");
+
+                    for (var i = 0; i < sections.length; i++) {
+                        const section = sections[i].getAttribute('name');
+                        const cards = sections[i].getElementsByTagName("card");
+
+                        for (var j = 0; j < cards.length; j++) {
+                            const id = cards[j].getAttribute('id');
+
+                            if (!this.cardIndex[id] || !this.cardIndex[id].filename) {
+                                throw new Error("No filename found in index for: " + id);
+                            }
+
+                            const card = new CardGameKit.CardData({
+                                name: cards[j].childNodes[0].nodeValue,
+                                filename: this.cardIndex[id].filename,
+                                copies: parseInt(cards[j].getAttribute('qty'))
+                            });
+
+                            if (section.includes('Setup') && isEncounter) {
+                                data.setup.push(card);
+                            } else if (section == 'Quest' && isEncounter) {
+                                card.backFilename = this.cardIndex[id].backfilename;
+                                data.questJson.cards.push(card);
+                            } else if (section == 'Hero' && !isEncounter) {
+                                data.heroes.push(card);
+                                if (this.cardIndex[id].threat) {
+                                    data.startingThreat += this.cardIndex[id].threat;
+                                }
+                            } else {
+                                data.json.cards.push(card);
                             }
                         }
+                    }
+
+                    if (isEncounter) {
+                        Array.prototype.push.apply(data.json.cards, data.setup);
+
+                        this.encounterDeck.loadCards(data.json, [
+                            new CardGameKit.CardResource({
+                                name: 'Damage',
+                                colour: 'red'
+                            }),
+                            new CardGameKit.CardResource({
+                                name: 'Progress',
+                                colour: 'green'
+                            })], this.zoomScale);
+
+                        data.questJson.cards = data.questJson.cards.reverse();
+                        this.questDeck.loadCards(data.questJson, [
+                                new CardGameKit.CardResource({
+                                    name: 'Progress',
+                                    colour: 'green'
+                                })], this.zoomScale);
+                        this.questDeck.stackFaceUp = null;
+                    } else {
+                        Array.prototype.push.apply(data.json.cards, data.heroes);
+
+                        this.setThreat(data.startingThreat);
+                        this.playerDeck.loadCards(data.json, [
+                            new CardGameKit.CardResource({
+                                name: 'Resources',
+                                colour: 'white'
+                            }),
+                            new CardGameKit.CardResource({
+                                name: 'Damage',
+                                colour: 'red'
+                            })], this.zoomScale);
+                    }
+
+                    button.destroy();
+                    this.game.updateLayers();
+                    this.game.sendEvent(
+                        new CardGameKit.GameEvent(LotrEventType.LOTR_LCG_DECK_LOADED, {
+                            value: xmlName
+                        })
+                    );
+                } else {
+                    var text = button.getChildren(function(node){
+                        return node.getClassName() === 'Text';
                     });
 
-                    Array.prototype.push.apply(encounterJson.cards, setupCards);
+                    text[0].setText("Load Index");
+                    this.gameLayer.draw();
                 }
-
-                this.encounterDeck.loadCards(encounterJson, [
-                    new CardGameKit.CardResource({
-                        name: 'Damage',
-                        colour: 'red'
-                    }),
-                    new CardGameKit.CardResource({
-                        name: 'Progress',
-                        colour: 'green'
-                    })], this.zoomScale);
-
-                const questJson = {};
-                questJson.name = json.name;
-                questJson.cards = json.quests.cards.reverse();
-                questJson.crossOrigin = json.crossOrigin;
-
-                this.questDeck.loadCards(questJson, [
-                    new CardGameKit.CardResource({
-                        name: 'Progress',
-                        colour: 'green'
-                    })], this.zoomScale);
-                this.questDeck.stackFaceUp = null;
-
-                button.destroy();
-                this.game.updateLayers();
-
-                this.game.sendEvent(
-                    new CardGameKit.GameEvent(LotrEventType.LOTR_LCG_DECK_LOADED, {
-                        value: json.name
-                    })
-                );
             } catch (ex) {
                 console.log(ex);
-                alert('Invalid Encounter Deck');
+                alert('Invalid Deck');
             }
         });
     }
 
-    loadPlayerDeck(button) {
-        this.fileLoad((data, name, extension) => {
-            try {
-                if (extension == 'json') {
-                    if (this.playerDeckXmlData) {
-                        const indexJson = JSON.parse(data);
-                        this.index = {};
+    loadCardIndex(data) {
+        this.cardIndex = {};
 
-                        this.index.playerBack = indexJson.playerBack;
-                        this.index.encounterBack = indexJson.encounterBack;
-                        this.index.crossOrigin = indexJson.crossOrigin;
+        const indexJson = JSON.parse(data);
 
-                        for (const [_, set] of Object.entries(indexJson.sets)) {
-                            for (const [key, card] of Object.entries(set)) {
-                                this.index[key] = card.filename;
-                            }
-                        }
+        this.cardIndex.playerBack = indexJson.playerBack;
+        this.cardIndex.encounterBack = indexJson.encounterBack;
+        this.cardIndex.crossOrigin = indexJson.crossOrigin;
 
-                        this.loadPlayerDeckWithIndex(this.playerDeckXmlData, this.playerDeckXmlName, button);
-                    } else {
-                        const json = JSON.parse(data);
-                        Array.prototype.push.apply(json.cards, json.heroes.cards);
-                        json.startingThreat = json.heroes.startingThreat;
-                        this.loadPlayerJson(json, button);
-                    }
-                } else if (extension == 'o8d') {
-                    if (this.index) {
-                        return this.loadPlayerDeckWithIndex(content, name, button);
-                    } else {
-                        var text = button.getChildren(function(node){
-                            return node.getClassName() === 'Text';
-                        });
-
-                        text[0].setText("Load Index");
-                        this.gameLayer.draw();
-
-                        this.playerDeckXmlData = data;
-                        this.playerDeckXmlName = name;
-                    }
-              } else {
-                    throw new Error('Invalid file type');
-                }
-            } catch (ex) {
-                console.log(ex);
-                alert('Invalid Player Deck');
-            }
-        });
-    }
-
-    loadPlayerDeckWithIndex(xmlData, name, button) {
-        var json = {};
-
-        json.name = name;
-        json.startingThreat = 0;
-        json.backFilename = this.index.playerBack;
-        json.cards = [];
-        json.crossOrigin = this.index.crossOrigin;
-
-        const xml = new window.DOMParser().parseFromString(xmlData, "text/xml");
-        const sections = xml.getElementsByTagName("section");
-        const heroes = [];
-
-        for (var i = 0; i < sections.length; i++) {
-            const section = sections[i].getAttribute('name');
-            const cards = sections[i].getElementsByTagName("card");
-
-            for (var j = 0; j < cards.length; j++) {
-                const id = cards[j].getAttribute('id');
-                const filename = this.index[id];
-
-                if (!filename) {
-                    throw new Error("No filename found in index for: " + id);
-                }
-
-                const card = new CardGameKit.CardData({
-                    name: cards[j].childNodes[0].nodeValue,
-                    filename: filename,
-                    copies: parseInt(cards[j].getAttribute('qty'))
-                });
-
-                if (section == 'Hero') {
-                    heroes.push(card);
-                } else {
-                    json.cards.push(card);
-                }
+        for (const [_, set] of Object.entries(indexJson.sets)) {
+            for (const [key, card] of Object.entries(set)) {
+                this.cardIndex[key] = card;
             }
         }
-
-        Array.prototype.push.apply(json.cards, heroes);
-
-        this.loadPlayerJson(json, button);
-    }
-
-    loadPlayerJson(json, button) {
-        this.setThreat(json.startingThreat);
-        this.playerDeck.loadCards(json, [
-            new CardGameKit.CardResource({
-                name: 'Resources',
-                colour: 'white'
-            }),
-            new CardGameKit.CardResource({
-                name: 'Damage',
-                colour: 'red'
-            })], this.zoomScale);
-
-        button.destroy();
-        this.game.updateLayers();
-
-        this.game.sendEvent(
-            new CardGameKit.GameEvent(LotrEventType.LOTR_LCG_DECK_LOADED, {
-                value: json.name
-            })
-        );
     }
 
     scaleToFit(containerWidth, containerHeight, width, height) {
