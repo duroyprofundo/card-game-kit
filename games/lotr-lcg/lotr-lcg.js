@@ -100,8 +100,14 @@ class LotrLcg {
 
         document.getElementById('screenshot-button').addEventListener('click', () => {
             setTimeout(() => {
+                const screenshot = this.game.screenshot();
+                if (!screenshot || screenshot.length == 0) {
+                    alert('Screenshot capture failed.');
+                    return;
+                }
+
                 const filename = 'lotr-lcg-' + Date.now() + '.png';
-                this.downloadURI(this.game.screenshot(), filename);
+                this.downloadURI(screenshot, filename);
             }, 0);
         });
 
@@ -539,6 +545,8 @@ class LotrLcg {
                                 if (this.cardIndex[id].threat) {
                                     data.startingThreat += this.cardIndex[id].threat;
                                 }
+                            } else if (section == 'Sideboard' && !isEncounter) {
+                                // Skip sideboard cards
                             } else {
                                 data.json.cards.push(card);
                             }
